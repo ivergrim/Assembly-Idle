@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Assembly Idle</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="panel header-panel">
+        <div class="header-left">
+          <h1>Assembly Idle</h1>
+          <p class="flavor">A goofy AI factory with questionable ethics.</p>
+        </div>
+        <div class="header-stats">
+          <div class="header-stat">
+            <span class="label">Money</span>
+            <span id="moneyDisplay" class="value">$0</span>
+          </div>
+          <div class="header-stat">
+            <span class="label">Lifetime</span>
+            <span id="lifetimeDisplay" class="value">$0</span>
+          </div>
+          <div class="header-stat">
+            <span class="label">Compute Cores</span>
+            <span id="ccDisplay" class="value">0</span>
+          </div>
+          <div class="header-stat">
+            <span class="label">Speed Mult</span>
+            <span id="speedMultDisplay" class="value">1.00×</span>
+          </div>
+          <div class="header-stat">
+            <span class="label">Reward Mult</span>
+            <span id="rewardMultDisplay" class="value">1.00×</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-layout">
+        <section id="tasksPanel" class="panel">
+          <h2>Task Queue</h2>
+          <div id="taskSelection" class="task-selection" aria-label="Task list"></div>
+          <div class="task-controls">
+            <button id="prevTaskBtn" aria-label="Previous task">Prev (A)</button>
+            <button id="startTaskBtn" aria-label="Start selected task">Start Task (1)</button>
+            <button id="stopTaskBtn" aria-label="Stop all tasks">Stop All</button>
+            <button id="nextTaskBtn" aria-label="Next task">Next (Z)</button>
+            <button id="automationToggle" aria-label="Toggle automation" disabled>
+              Automation Off
+            </button>
+          </div>
+          <div id="activeSlots" class="slots-container"></div>
+        </section>
+
+        <section id="shopPanel" class="panel">
+          <h2>Shop</h2>
+          <div id="shopItems" class="shop-items" aria-label="Item shop"></div>
+        </section>
+      </main>
+
+      <section id="statsPanel" class="panel stats-panel">
+        <h2>Stats &amp; Prestige</h2>
+        <div class="stats-grid">
+          <div>
+            <p><strong>Playtime:</strong> <span id="playtimeDisplay">00:00</span></p>
+            <p><strong>Tasks Completed:</strong> <span id="tasksCompletedDisplay">0</span></p>
+            <p><strong>Current DPS:</strong> <span id="dpsDisplay">$0/s</span></p>
+          </div>
+          <div>
+            <h3>Achievements</h3>
+            <ul id="achievementList" class="achievement-list"></ul>
+          </div>
+          <div class="prestige">
+            <h3>Prestige</h3>
+            <p id="prestigeInfo">
+              Reset progress to earn Compute Cores for permanent bonuses.
+            </p>
+            <p>
+              <strong>Projected Cores:</strong>
+              <span id="projectedCCDisplay">0</span>
+            </p>
+            <button id="prestigeButton" aria-label="Prestige" disabled>Prestige (P)</button>
+          </div>
+          <div class="save-controls">
+            <h3>Save Data</h3>
+            <button id="manualSaveButton" aria-label="Save game">Save</button>
+            <button id="exportButton" aria-label="Export save">Export</button>
+            <label for="importInput" class="import-label">Import</label>
+            <input id="importInput" type="file" accept="application/json" />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="prestigeModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-content panel">
+        <h2>Prestige Confirmation</h2>
+        <p>
+          Prestiging will reset your money, items, and task progress but award Compute Cores
+          for permanent bonuses.
+        </p>
+        <p>
+          You will earn <strong><span id="modalProjectedCC">0</span> Compute Cores</strong>.
+        </p>
+        <div class="modal-actions">
+          <button id="confirmPrestigeButton" aria-label="Confirm prestige">Confirm</button>
+          <button id="cancelPrestigeButton" aria-label="Cancel prestige">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
